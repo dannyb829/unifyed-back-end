@@ -3,6 +3,7 @@ class Account < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+        #  will get back to this => , :confirmable
 
   has_many :comments
   has_many :headlines, through: :comments
