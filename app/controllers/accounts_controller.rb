@@ -10,22 +10,25 @@ class AccountsController < ApplicationController
     def show
         if params[:id]
           user = Account.find(params[:id])
-          render json: user, serializer: CurrentUserSerializer
+          render json: user, serializer: AccountSerializer
         else
-          render json: @current_user, serializer: CurrentUserSerializer
+          render json: @current_user, serializer: AccountSerializer
         end
     end
 
     def update
       @current_user.update!(account_params)
-      render json: @current_user, serializer: CurrentUserSerializer
+      render json: @current_user, serializer: AccountSerializer
     end
 
     def followees 
         render json: @current_user.followees
     end
 
-    
+    def search_results
+      results = Account.where("LOWER(first_name) LIKE ?", "%#{params[:search]}%")
+      render json: results, status: :ok
+    end
     
     private 
 

@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
-  resources :likes
-  resources :friendships
+  get 'activities/index'
+  resources :posts
+  resources :likes, only: [:show,:create,:destroy]
+  post '/liked', to: 'likes#is_liked'
+  # resources :friendships
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  #search
+  post '/headlines/search', to: 'headlines#search_results'
+  post '/accounts/search', to: 'accounts#search_results'
+  post '/people/search', to: 'accounts#search_results'
 
   get '/auth', to: 'accounts#show'
   post '/signup', to: 'accounts#create'
   get '/followees', to: 'accounts#followees'
 
+  resources :friendships, only: [:create, :destroy]
+  resources :activities
   resources :headlines
   resources :comments
-  resources :accounts
+  resources :accounts, only: [:show, :update]
   devise_for :accounts, controller: {
     confirmations: "confirmations"
   }

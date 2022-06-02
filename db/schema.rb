@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_24_020942) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_31_202933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,16 +36,42 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_020942) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "activities", id: :serial, force: :cascade do |t|
+    t.string "trackable_type"
+    t.integer "trackable_id"
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.integer "recipient_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "headline_id"
     t.integer "account_id"
+    t.integer "commentable_id"
+    t.string "commentable_type"
+  end
+
+  create_table "currents", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -64,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_020942) do
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.string "source"
+    t.integer "account_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -74,6 +101,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_24_020942) do
     t.integer "account_id"
     t.index ["account_id", "likeable_id", "likeable_type"], name: "index_likes_on_account_id_and_likeable_id_and_likeable_type", unique: true
     t.index ["likeable_id", "likeable_type"], name: "index_likes_on_likeable_id_and_likeable_type"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "content"
+    t.string "author"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "account_id"
   end
 
 end

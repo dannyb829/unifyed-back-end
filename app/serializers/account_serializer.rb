@@ -1,4 +1,4 @@
-class CurrentUserSerializer < ActiveModel::Serializer
+class AccountSerializer < ActiveModel::Serializer
   attributes :id, 
               :email, 
               :first_name,
@@ -8,7 +8,9 @@ class CurrentUserSerializer < ActiveModel::Serializer
               :username,
               :bio,
               :followers_amount,
-              :followees_amount
+              :followees_amount,
+              :user_followed,
+              :follows_user
 
               def followees_amount
                 object.followees.count
@@ -17,4 +19,9 @@ class CurrentUserSerializer < ActiveModel::Serializer
               def followers_amount
                 object.followers.count
               end
+
+              def follows_user
+                !!Friendship.find_by(followee: Current.user, follower: object)
+              end
+
 end

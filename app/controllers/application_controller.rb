@@ -1,11 +1,22 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies
+    include PublicActivity::StoreController
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
+    rescue_from ActionController::RoutingError, with: :route_not_found
 
     before_action :authorize
+    before_action :set_current_user
 
     private
+
+    def set_current_user
+        Current.user = @current_user
+    end
+
+    def record_not_found
+        render json: {error: 'Routing Error'}, status: 400
+    end
 
     def record_not_found
         render json: {error: "#{controller_name.classify} not found"}, status: :not_found
