@@ -1,9 +1,7 @@
 class Account < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-        #  , :confirmable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable
   has_many :posts
 
   has_many :comments
@@ -24,6 +22,7 @@ class Account < ApplicationRecord
   has_many :likes
 
   private 
+  
 
   def user_followed
     !!Friendship.find_by(follower: Current.user, followee: self)

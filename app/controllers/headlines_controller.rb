@@ -1,4 +1,5 @@
 class HeadlinesController < ApplicationController
+    skip_before_action :authorize, only: :preview
 
     def index
         render json: Headline.order(date: :desc)
@@ -19,6 +20,10 @@ class HeadlinesController < ApplicationController
     def search_results
         results = Headline.where("LOWER(title) LIKE ?", "%#{params[:search]}%")
         render json: results.order(date: :desc), status: :ok
+    end
+
+    def preview
+        render json: Headline.order(date: :desc).limit(3)
     end
 
     private

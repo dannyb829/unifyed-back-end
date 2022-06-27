@@ -15,17 +15,22 @@ Rails.application.routes.draw do
   get '/auth', to: 'accounts#show'
   post '/signup', to: 'accounts#create'
   get '/followees', to: 'accounts#followees'
+  get '/preview', to: 'headlines#preview'
 
   resources :friendships, only: [:create, :destroy]
   resources :activities
   resources :headlines
   resources :comments
-  resources :accounts, only: [:show, :update]
-  devise_for :accounts, controller: {
-    confirmations: "confirmations"
+  devise_for :accounts, controllers: {
+    confirmations: 'confirmations',
+    passwords: "passwords"
   }
+  
+  resources :accounts, only: [:show, :update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  # root "http://localhost:3001/Home"
+
+
 end

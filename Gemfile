@@ -4,8 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.4"
 
 gem 'figaro'
-gem 'tlsmail'
+gem 'openssl'
 gem 'public_activity'
+gem "letter_opener", group: :development
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
@@ -21,6 +22,12 @@ gem "puma", "~> 5.0"
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'devise'
+gem 'devise-i18n'
+gem 'bootstrap', '~> 4'
+gem 'cssbundling-rails'
+
+gem 'devise-bootstrap-views', '~> 1.0'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 # serializer gem
@@ -54,3 +61,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "premailer-rails", "~> 1.11"

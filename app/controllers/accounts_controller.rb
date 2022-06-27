@@ -1,10 +1,12 @@
 class AccountsController < ApplicationController
   skip_before_action :authorize, :only => 'create'
+  
 
     def create
       new_account = Account.create!(account_params)
-      session[:account_id] = new_account.id
-      render json: new_account, status: :created
+      # session[:account_id] = new_account.id
+      # render json: new_account, status: :created
+      render json: { message: "Check email to confirm account"}, status: :created
     end
 
     def show
