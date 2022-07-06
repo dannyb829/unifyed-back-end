@@ -6,9 +6,7 @@ class Account < ApplicationRecord
 
   has_many :comments
   has_many :headlines
-  # has_many :headlines
 
-  
   has_many :followed, foreign_key: :follower_id, :class_name => 'Friendship'
   has_many :followees, through: :followed
   

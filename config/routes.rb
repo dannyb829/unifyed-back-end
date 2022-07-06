@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   get 'activities/index'
   resources :posts
   resources :likes, only: [:show,:create,:destroy]

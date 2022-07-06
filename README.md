@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Devise authentication, but uses custom authorization. Custom controllers.
 
-Things you may want to cover:
+If running locally ensure that links match requests made from front end.
 
-* Ruby version
+Email confirmation links and password reset emails will likely show in your spam folder in your mailbox.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Enjoy using UNIFYED!
