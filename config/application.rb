@@ -28,6 +28,7 @@ module UnifiedBackEnd
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = false
 
+    config.assets.initialize_on_precompile = false
     config.middleware.insert_after Rack::Runtime, Rack::MethodOverride
   end
 end
