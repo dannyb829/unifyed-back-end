@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user&.valid_password?(params[:password])
       if user.confirmed?
         session[:account_id] = user.id
+        puts "FUCKING SESSION", session[:account_id]
         user.last_sign_in_at = Time.now
         render json: user, status: :created
       else
