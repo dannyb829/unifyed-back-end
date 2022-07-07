@@ -14,7 +14,7 @@ module UnifiedBackEnd
     # cookies and sessions
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore    # same site protection
-    config.action_dispatch.cookies_same_site_protection = :none
+    config.action_dispatch.cookies_same_site_protection = nil
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
