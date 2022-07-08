@@ -10,6 +10,7 @@ class AccountsController < ApplicationController
     end
 
     def show
+      debugger
         if params[:id]
           user = Account.find(params[:id])
           render json: user, serializer: AccountSerializer
