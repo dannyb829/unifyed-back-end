@@ -32,7 +32,7 @@ gem 'devise-bootstrap-views', '~> 1.0'
 # gem "redis", "~> 4.0"
 # serializer gem
 gem 'active_model_serializers'
-
+gem 'rails_same_site_cookie', '~> 0.1.0'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
