@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authorize
-        puts session[:account_id]
+        puts session[:account_id], "<- this is session"
         @current_user = Account.find_by_id(session[:account_id])
         render json: {error:'Not Authorized'}, status: 401 unless @current_user
     end

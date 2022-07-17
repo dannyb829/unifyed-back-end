@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
       if user.confirmed?
         session[:account_id] = user.id
         user.last_sign_in_at = Time.now
+        puts session[:account_id], '<- this is session'
         render json: user, status: :created
       else
         render json: {error: "Check your email for confirmation"}, status: 401
