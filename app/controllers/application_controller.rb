@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
         Current.user = @current_user
     end
 
-    def record_not_found
+    def route_not_found
         render json: {error: 'Routing Error'}, status: 400
     end
 
