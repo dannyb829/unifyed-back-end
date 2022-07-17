@@ -10,7 +10,6 @@ class AccountsController < ApplicationController
     end
 
     def show
-      puts session[:account_id]
         if params[:id]
           user = Account.find(params[:id])
           render json: user, serializer: AccountSerializer
