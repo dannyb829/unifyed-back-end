@@ -27,9 +27,20 @@ class ApplicationController < ActionController::Base
         render json: {error: invalid.record.errors.full_messages }, status: 422
     end
 
+    def encode_token(user_data={})
+        expiration = 24.hours.from_now
+        user_data[:expiration] = expiration.to_i
+        JWT.encode(user_data,Rails.application.secrets.secret_key_base, 'HS256')
+      end
+
+     # Rails.application.secrets.secret_key_base
+    def decode
+        token = request.headers["Authorization"] || params['Authorization']
+        JWT.decode(token,Rails.application.secrets.secret_key_base, true, {algorithm:'HS256'})[0]
+    end
+
     def authorize
-        puts session[:account_id], "<- this is session"
-        @current_user = Account.find_by_id(session[:account_id])
+        @current_user = Account.find_by_id(decode['id'])
         render json: {error:'Not Authorized'}, status: 401 unless @current_user
     end
 

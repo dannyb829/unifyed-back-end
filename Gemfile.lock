@@ -114,6 +114,7 @@ GEM
     irb (1.4.1)
       reline (>= 0.3.0)
     jsonapi-renderer (0.2.2)
+    jwt (2.4.1)
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.8.1)
@@ -250,6 +251,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views (~> 1.0)
   figaro
+  jwt
   letter_opener
   openssl
   pg (~> 1.1)

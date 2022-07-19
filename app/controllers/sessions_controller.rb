@@ -6,10 +6,8 @@ class SessionsController < ApplicationController
     user = Account.find_by(username: params[:username])
     if user&.valid_password?(params[:password])
       if user.confirmed?
-        session[:account_id] = user.id
         user.last_sign_in_at = Time.now
-        puts session[:account_id], '<- this is session'
-        render json: user, status: :created
+        render json: {'user': user, 'token': encode_token({'id': user.id,'username': user.username})}, status: :created
       else
         render json: {error: "Check your email for confirmation"}, status: 401
       end  
@@ -19,8 +17,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete :account_id
+    # will implement blacklist for logged out jwt tokens
     render json: {message: 'You have logged out'}, status: 200
   end
+  
 
 end
