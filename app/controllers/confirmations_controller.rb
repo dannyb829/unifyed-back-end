@@ -4,6 +4,6 @@ class ConfirmationsController < Devise::ConfirmationsController
 
     def after_confirmation_path_for(resource_name,resource)
         sign_in(resource)
-        "http://localhost:3001/Home"
+        "https://main--unifyed.netlify.app/Home"
     end 
 end
