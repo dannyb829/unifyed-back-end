@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
         expiration = 24.hours.from_now
         user_data[:expiration] = expiration.to_i
         
-        JWT.encode(user_data,Rails.application.credentials.jwt[:secret_key], 'HS256')
+        JWT.encode(user_data,Rails.application.credentials.production.secret_key_base, 'HS256')
       end
 
      # Rails.application.secrets.secret_key_base
     def decode
         token = request.headers["Authorization"] || params['Authorization']
-        JWT.decode(token,Rails.application.credentials.jwt[:secret_key], true, {algorithm:'HS256'})[0]
+        JWT.decode(token,Rails.application.credentials.production.secret_key_base, true, {algorithm:'HS256'})[0]
     end
 
     def authorize
