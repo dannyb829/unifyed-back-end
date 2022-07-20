@@ -82,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: unifyed_production
+  database: unifyed_development
   # username: unifyed
   # password: <%= ENV["UNIFYED_BACK_END_DATABASE_PASSWORD"] %>
