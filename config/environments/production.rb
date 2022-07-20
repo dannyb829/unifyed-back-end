@@ -14,7 +14,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Show full error reports.
-  config.consider_all_requests_local = false
+  config.consider_all_requests_local = true
 
   # Enable server timing
   config.server_timing = true
@@ -80,8 +80,8 @@ Rails.application.configure do
     :address              => "smtp.gmail.com",
          :port                 => 587,
          :authentication       => :plain,
-         :user_name            => 'no.reply.unifyed@gmail.com',
-         :password             => 'fmbintsdhdewfldv',
+         :user_name            => Rails.application.credentials.config[:gmail_username],
+         :password             => Rails.application.credentials.config[:password],
          :enable_starttls_auto => true
 }
     

@@ -39,8 +39,7 @@ class PasswordsController < Devise::PasswordsController
         else
             set_flash_message!(:notice, :updated_not_active)
         end
-            puts "update section"
-            after_resetting_password_path_for(resource)
+            respond_with resource, location: "https://main--unifyed.netlify.app/login"
         else
             set_minimum_password_length
             respond_with resource
